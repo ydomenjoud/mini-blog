@@ -9,5 +9,5 @@ block content
                   a(href=post.url)=post.title
                time(datetime=post.publish)=post.publish
             .entry
-               p #{content}
+               p #{post.description}
             .clearfix

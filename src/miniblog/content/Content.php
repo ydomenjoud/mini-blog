@@ -55,7 +55,7 @@ class Content
             $vars['page'] = $informations['parameters'];
             $vars['template_directory'] = TEMPLATE_DIR;
             $vars['pages_list'] = $this->pages_list;
-            $vars['url'] = $uri . CACHE_EXTENSION;
+            $vars['url'] = '/' . $uri . CACHE_EXTENSION;
 
             // render layout
             $layout = $uri=='index' ? 'index.pug' : 'post.pug';
@@ -114,11 +114,20 @@ class Content
                 $tags = explode(' ', $parameters['tags'] );
             }
 
+            // description
+            $description = '';
+            if( array_key_exists('description', $parameters) || !empty($parameters['description']) ){
+                $description = $parameters['description'];
+            } else {
+                $description = substr(strip_tags($informations['content']), 0, 200);
+            }
+
             // add to pages list
             $pages_list[$uri] = [
                 'url' => '/'.$uri . $cache_extension,
                 'publish' => $parameters['publish'],
                 'title' => $parameters['title'],
+                'description' => $description,
                 'tags' => $tags,
                 'md5' => md5_file($filename )
             ];
