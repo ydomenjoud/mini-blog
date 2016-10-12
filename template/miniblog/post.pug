@@ -1,0 +1,12 @@
+extends layout
+
+block content
+   article.post
+      .post-content
+         header
+            h1.title
+               a(href=url)=page.title
+            time(datetime=page.publish)=page.publish
+         .entry
+            p #{content}
+         .clearfix

@@ -1,0 +1,24 @@
+{
+  "name": "ydomenjoud/mini-blog",
+  "description": "extra small php blog",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "yannick domenjoud",
+      "email": "yannick@6tech.net"
+    }
+  ],
+  "require": {
+    "erusev/parsedown": "1.6.0",
+    "mnapoli/front-yaml": "1.5.2",
+    "pug-php/pug": "^2.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "MiniBlog\\": "src/miniblog/",
+      "MiniBlog\\Content\\": "src/miniblog/content",
+      "MiniBlog\\Cache\\": "src/miniblog/cache"
+    }
+  }
+}
