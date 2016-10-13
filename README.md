@@ -1,6 +1,7 @@
 # mini-blog
 
 ## Install
+* need php7
 * clone this repo
 * enable mod_rewrite
 * install composer
