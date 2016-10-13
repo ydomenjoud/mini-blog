@@ -53,6 +53,7 @@ class Content
             $vars = [];
             $vars['content'] = $informations['content'];
             $vars['page'] = $informations['parameters'];
+
             $vars['template_directory'] = TEMPLATE_DIR;
             $vars['pages_list'] = $this->pages_list;
             $vars['url'] = '/' . $uri . CACHE_EXTENSION;
@@ -109,23 +110,18 @@ class Content
             }
 
             // tags
-            $tags = [];
-            if( array_key_exists('tags', $parameters) || !empty($parameters['tags']) ){
-                $tags = explode(' ', $parameters['tags'] );
-            }
+            $tags = $parameters['tags'] ?? [];
 
             // description
-            $description = '';
-            if( array_key_exists('description', $parameters) || !empty($parameters['description']) ){
-                $description = $parameters['description'];
-            } else {
-                $description = substr(strip_tags($informations['content']), 0, 200);
-            }
+            $description = $parameters['description'] ?? substr(strip_tags($informations['content']), 0, 200);
+
 
             // add to pages list
             $pages_list[$uri] = [
                 'url' => '/'.$uri . $cache_extension,
+                'author' => $parameters['author'] ?? '',
                 'publish' => $parameters['publish'],
+                'publish_formatted' => $parameters['publish_formatted'],
                 'title' => $parameters['title'],
                 'description' => $description,
                 'tags' => $tags,

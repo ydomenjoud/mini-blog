@@ -6,7 +6,16 @@ block content
          header
             h1.title
                a(href=url)=page.title
-            time(datetime=page.publish)=page.publish
+            if page.tags
+               each tag in page.tags
+                  a(href="")='#' + tag
+                  |  &nbsp;
          .entry
+            p #{page.description}
             p #{content}
+         footer
+            if page.author
+               a(rel="author", href="")=page.author
+            | &nbsp;/&nbsp;
+            time(datetime=page.publish)=page.publish_formatted
          .clearfix

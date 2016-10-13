@@ -39,9 +39,12 @@ h3 {
 a {
     text-decoration: none;
     color: #258fb8;
+    /*text-shadow: 1px 1px #cfddee;*/
 }
 a:hover {
     text-decoration: none;
+    color: #2baddc;
+    /*text-shadow: 1px 1px rgba(141, 153, 169, 0.48);*/
 }
 .alignleft {
     float: left;
@@ -170,6 +173,11 @@ article .post-content {
     margin-bottom: 24px;
     position: relative;
 }
+
+article .post-content footer {
+    text-align: right;
+}
+
 @media screen and (max-width: 600px) {
     article .post-content {
         padding-left: 20px;
@@ -424,6 +432,11 @@ article .entry .pullquote {
     width: 45%;
     font-size: 1.5em;
 }
+article .entry a.more {
+    display: block;
+    text-align: right;
+}
+
 article footer {
     margin-top: 15px;
     padding-top: 10px;
@@ -606,6 +619,7 @@ article footer .addthis iframe {
     list-style: disc;
     margin-left: 20px;
 }
+
 #sidebar .search {
     margin-bottom: 30px;
 }

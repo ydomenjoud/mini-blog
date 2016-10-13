@@ -45,9 +45,10 @@ class Parser
     private function cleanParameters($parameters){
 
         foreach($parameters AS $key=>&$param){
+
             // Date timestamp between 2000 & 2030
             if( $param > 1000000000 && $param < 1900000000 ){
-                $param = strftime('%b %d %G at %H:%M', $param);
+                $parameters[$key.'_formatted'] = strftime('%b %d %G at %H:%M', $param);
             }
         }
 

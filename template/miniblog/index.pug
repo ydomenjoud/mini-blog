@@ -7,7 +7,12 @@ block content
             header
                h1.title
                   a(href=post.url)=post.title
-               time(datetime=post.publish)=post.publish
             .entry
                p #{post.description}
+               a.more(href=post.url) see more
+            footer
+               if post.author
+                  a(rel="author", href="")=post.author
+               | &nbsp;/&nbsp;
+               time(datetime=page.publish)=page.publish_formatted
             .clearfix
