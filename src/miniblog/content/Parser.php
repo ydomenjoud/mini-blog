@@ -67,6 +67,6 @@ class DateStore {
         $this -> formatted = strftime('%b %d %G %H:%M', $this -> timestamp);
     }
     public function __toString(){
-        return $this -> timestamp." to string";
+        return $this -> timestamp."";
     }
 }
