@@ -17,7 +17,9 @@ class Parser
      * Parser constructor.
      */
     public function __construct(){
-        $this -> parser = new \Mni\FrontYAML\Parser();
+        $this -> parser = new \Mni\FrontYAML\Parser(
+            new BridgeParser()
+        );
     }
 
     /**
@@ -44,14 +46,27 @@ class Parser
      */
     private function cleanParameters($parameters){
 
-        foreach($parameters AS $key=>&$param){
 
-            // Date timestamp between 2000 & 2030
-            if( $param > 1000000000 && $param < 1900000000 ){
-                $parameters[$key.'_formatted'] = strftime('%b %d %G at %H:%M', $param);
+        foreach($parameters AS $key=>$param){
+            // manage date
+            if( $param instanceof \DateTime ){
+                $parameters[$key] = new DateStore($param);
             }
+
         }
 
         return $parameters;
+    }
+}
+
+class DateStore {
+    public $object, $timestamp, $formatted;
+    public function __construct(\DateTime $object){
+        $this -> object = $object;
+        $this -> timestamp = $object->getTimestamp();
+        $this -> formatted = strftime('%b %d %G %H:%M', $this -> timestamp);
+    }
+    public function __toString(){
+        return $this -> timestamp." to string";
     }
 }

@@ -18,12 +18,13 @@ class Templater
     private $directory;
 
     /**
-     * Parser constructor.
+     * Templater constructor.
      */
     public function __construct()
     {
         $this -> directory = TEMPLATE_DIR . DIRECTORY_SEPARATOR;
         $this -> engine = new Pug();
+
     }
 
 

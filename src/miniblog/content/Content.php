@@ -58,6 +58,7 @@ class Content
             $vars['pages_list'] = $this->pages_list;
             $vars['url'] = '/' . $uri . CACHE_EXTENSION;
 
+
             // render layout
             $layout = $uri=='index' ? 'index.pug' : 'post.pug';
             $content = $this -> templater ->render($layout, $vars);
@@ -102,9 +103,8 @@ class Content
 
             // if not publish date or publish date not passed, continue
             if( !$parameters
-                || !array_key_exists('publish', $parameters)
-                || empty($parameters['publish'])
-                || $parameters['publish'] > time()
+                || !isset($parameters['publish'])
+                || $parameters['publish'] > (new \DateTime())
                 || ( array_key_exists('page', $parameters) && $parameters['page'] == true )  ){
                 continue;
             }
@@ -121,7 +121,6 @@ class Content
                 'url' => '/'.$uri . $cache_extension,
                 'author' => $parameters['author'] ?? '',
                 'publish' => $parameters['publish'],
-                'publish_formatted' => $parameters['publish_formatted'],
                 'title' => $parameters['title'],
                 'description' => $description,
                 'tags' => $tags,

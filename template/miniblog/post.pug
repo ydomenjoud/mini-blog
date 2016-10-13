@@ -17,5 +17,5 @@ block content
             if page.author
                a(rel="author", href="")=page.author
             | &nbsp;/&nbsp;
-            time(datetime=page.publish)=page.publish_formatted
+            time(datetime=page.publish.timestamp)=page.publish.formatted
          .clearfix
