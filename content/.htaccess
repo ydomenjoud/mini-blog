@@ -1,1 +1,4 @@
-Deny from All
+<Files ~ "\.(md)$">
+   order deny,allow
+   deny from all
+</Files>

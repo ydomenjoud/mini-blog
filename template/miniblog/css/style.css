@@ -178,6 +178,11 @@ article .post-content footer {
     text-align: right;
 }
 
+
+article .post-content header img {
+    max-height: 100px;
+}
+
 @media screen and (max-width: 600px) {
     article .post-content {
         padding-left: 20px;

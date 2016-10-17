@@ -82,6 +82,7 @@ class Content
             $vars['page'] = $informations['parameters'];
 
             $vars['template_directory'] = TEMPLATE_DIR;
+            $vars['article_directory'] = '/' . dirname($uri) . '/';
             $vars['pages_list'] = $this->pages_list;
             $vars['url'] = 'http://' . $_SERVER['HTTP_HOST']. '/' . $uri . CACHE_EXTENSION;
 

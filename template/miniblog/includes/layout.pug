@@ -6,7 +6,12 @@ html(lang=page.lang)
 		meta(name='includes', content='Yannick Domenjoud')
 		meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
 		meta(property='og:site_name', content='Saving Time')
-		meta(property='og:image', content='undefined')
+		meta(property='og:title', content=page.title)
+		if page.url
+			meta(property='og:url', content=page.url)
+		if page.image
+			meta(property='og:image', content=article_directory + page['image'])
+		meta(property='og:type', content='article')
 		link(rel='alternate', href='/atom.xml', title='Saving Time', type='application/atom+xml')
 		link(rel='stylesheet', href='/#{template_directory}/css/style.css', media='screen', type='text/css')
 		//if lt IE 9

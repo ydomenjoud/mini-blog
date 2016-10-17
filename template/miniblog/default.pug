@@ -4,11 +4,13 @@ block content
    article.post
       .post-content
          header
+            if page.image
+               a(href=page.image, target="_blank"): img(src=page.image, align="right")
             h1.title
                a(href=url)=page.title
             if page.tags
                each tag in page.tags
-                  a(href="")='#' + tag
+                  a(href="/search.html?tags="+tag)='#' + tag
                   |  &nbsp;
          .entry
             p #{page.description}

@@ -2,4 +2,13 @@
 RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} (\.html)$
+RewriteCond %{REQUEST_URI} !^/content
 RewriteRule ^(.*)$ /index.php?url=$1 [NC,L,QSA]
+
+# rewrite all on content
+RewriteCond %{REQUEST_URI} !(\.html)$
+RewriteCond %{REQUEST_URI} !^/content
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ /content/$1 [NC,L,QSA]
