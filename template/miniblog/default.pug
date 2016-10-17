@@ -1,4 +1,4 @@
-extends layout
+extends includes/layout
 
 block content
    article.post
@@ -15,7 +15,7 @@ block content
             p #{content}
          footer
             if page.author
-               a(rel="author", href="")=page.author
+               a(rel="author", href="/search.html?author="+page['author'])=page.author
             | &nbsp;/&nbsp;
             time(datetime=page.publish.timestamp)=page.publish.formatted
          .clearfix

@@ -36,13 +36,18 @@ class Templater
      */
     public function render($layout, $parameters = []){
 
-        $layout_file = $this->directory. $layout;
-//
-//        var_dump($layout_file, $parameters);
-//        die();
-
+        $layout_file = $this->directory. $layout . '.pug';
         return  $this -> engine -> render($layout_file, $parameters);
     }
 
+    /**
+     * Does this layout exists
+     * @param $layout
+     * @return bool
+     */
+    public function layoutExists($layout){
+        $file = $this->directory . $layout . '.pug';
+        return file_exists($file);
+    }
 
 }

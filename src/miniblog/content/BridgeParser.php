@@ -10,7 +10,7 @@ namespace miniblog\content;
 
 
 use Mni\FrontYAML\YAML\YAMLParser;
-use Symfony\Component\Yaml\Parser;
+use Symfony\Component\Yaml\Parser as SFYamlParser;
 use Symfony\Component\Yaml\Yaml;
 
 /**
@@ -27,7 +27,7 @@ class BridgeParser implements YAMLParser
 
     public function __construct()
     {
-        $this->parser = new Parser();
+        $this->parser = new SFYamlParser();
     }
 
     /**

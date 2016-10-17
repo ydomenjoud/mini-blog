@@ -24,7 +24,7 @@ class File
 
         $path = realpath($path);
         // browse file
-        foreach (new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($path)) as $filename) {
+        foreach (new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($path, \RecursiveDirectoryIterator::FOLLOW_SYMLINKS)) as $filename) {
             $filename = $filename->__toString();
             $basename = basename($filename);
             if (substr($basename, -strlen($extension)) === $extension) {

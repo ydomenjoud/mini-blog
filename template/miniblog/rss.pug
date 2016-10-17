@@ -1,0 +1,16 @@
+doctype xml
+rss(version='2.0')
+	channel
+		title=page.title
+		link=page.link
+		description=page.description
+		language=page.language
+		managingeditor=page.managingeditor
+		webmaster=page.webmaster
+		each post in pages_list
+			item
+				title=post.title
+				link=post.url
+				description=post.description
+				pubdate=post.rss
+				guid=post.url

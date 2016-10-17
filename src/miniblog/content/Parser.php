@@ -30,7 +30,6 @@ class Parser
     public function parse( $uri ){
         $file = CONTENT_DIR . DIRECTORY_SEPARATOR . $uri . CONTENT_EXTENSION;
         $parsed_informations = $this -> parser -> parse( file_get_contents($file) );
-
         $informations = [
             'content' => $parsed_informations -> getContent(),
             'parameters' => $this -> cleanParameters( $parsed_informations -> getYAML() )
@@ -45,8 +44,9 @@ class Parser
      * @return mixed
      */
     private function cleanParameters($parameters){
-
-
+        if( empty($parameters) ){
+            return [];
+        }
         foreach($parameters AS $key=>$param){
             // manage date
             if( $param instanceof \DateTime ){
@@ -65,6 +65,7 @@ class DateStore {
         $this -> object = $object;
         $this -> timestamp = $object->getTimestamp();
         $this -> formatted = strftime('%b %d %G %H:%M', $this -> timestamp);
+        $this -> rss = date('r', $this -> timestamp);
     }
     public function __toString(){
         return $this -> timestamp."";

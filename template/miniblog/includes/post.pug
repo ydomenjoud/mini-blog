@@ -1,0 +1,12 @@
+header
+	h1.title
+		a(href=post.url)=post.title
+.entry
+	p #{post.description}
+	a.more(href=post.url) see more
+footer
+	if post.author
+		a(rel="author", href="/search.html?author=" + post['author'] )=post.author
+	| &nbsp;/&nbsp;
+	time(datetime=post.publish.timestamp)=post.publish.formatted
+.clearfix

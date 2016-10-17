@@ -31,11 +31,10 @@ class Blog
      */
     public function show(string $url) {
 
-
         // get uri for this resources
         $page = $this -> content -> getUri($url);
 
-        if( $builtPage = $this -> content -> get($page) ){
+        if( $builtPage = $this -> content -> get($page, $_GET) ){
             $content = $builtPage;
         }
         // 404

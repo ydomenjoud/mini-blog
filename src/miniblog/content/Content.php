@@ -21,6 +21,32 @@ class Content
 
 
     /**
+     * search in page list
+     * @param $filters
+     * @return array list of pages matching filters
+     */
+    private function search($filters){
+
+        $matches = [];
+
+        // for each page
+        foreach($this->pages_list AS $page){
+            // for each filter
+            foreach($filters AS $key=>$value){
+                if( !empty($page[$key]) ){
+                    if(
+                        is_array( $page[$key] ) && in_array($value, $page[$key])
+                        || is_string($page[$key]) && strpos($page[$key], $value) !== false
+                    ){
+                        $matches[] = $page;
+                    }
+                }
+            }
+        }
+        return $matches;
+    }
+
+    /**
      * check if the content page exist
      * @param string $uri
      * @return bool
@@ -33,9 +59,10 @@ class Content
     /**
      * Get a page
      * @param string $uri
+     * @param $filters url params
      * @return string the content of page
      */
-    public function get( string $uri ){
+    public function get( string $uri, $filters = [] ){
 
         // if content file don't exists, this is page was deleted
         if( !$this -> exists($uri) ){
@@ -56,11 +83,27 @@ class Content
 
             $vars['template_directory'] = TEMPLATE_DIR;
             $vars['pages_list'] = $this->pages_list;
-            $vars['url'] = '/' . $uri . CACHE_EXTENSION;
+            $vars['url'] = 'http://' . $_SERVER['HTTP_HOST']. '/' . $uri . CACHE_EXTENSION;
 
+            // filters
+            $vars['filtered_list'] = [];
+            if( count($filters) > 0 ){
+                $vars['filtered_list'] = $this -> search($filters);
+            }
+
+            // render headers
+            if( isset($informations['parameters']['headers']) && !empty($headers = $informations['parameters']['headers'] ) ){
+                foreach($headers AS $header){
+                    // manage if quote is absent
+                    if( is_array($header) ){
+                        $header = join(':', $header);
+                    }
+                    header($header, true);
+                }
+            }
 
             // render layout
-            $layout = $uri=='index' ? 'index.pug' : 'post.pug';
+            $layout = $this -> templater -> layoutExists($uri) ?  $uri : 'default';
             $content = $this -> templater ->render($layout, $vars);
 
             // cache page
@@ -118,7 +161,7 @@ class Content
 
             // add to pages list
             $pages_list[$uri] = [
-                'url' => '/'.$uri . $cache_extension,
+                'url' => 'http://' . $_SERVER['HTTP_HOST']. '/' .$uri . $cache_extension,
                 'author' => $parameters['author'] ?? '',
                 'publish' => $parameters['publish'],
                 'title' => $parameters['title'],
@@ -171,15 +214,18 @@ class Content
             $uri = substr($uri, strlen($content_dir) ); // remove content dir
         }
 
-        // remove extension cache
-        if( substr($uri, -strlen($cache_extension))  === $cache_extension ){
-            $uri = substr($uri, 0, -strlen($cache_extension) );
-        }
-
-        // remove extension content
-        if( substr($uri, -strlen($content_extension))  === $content_extension ){
-            $uri = substr($uri, 0, -strlen($content_extension) );
-        }
+        // remove extension
+        $uri = pathinfo($uri, PATHINFO_DIRNAME) . DIRECTORY_SEPARATOR .pathinfo($uri, PATHINFO_FILENAME);
+//
+//        // remove extension cache
+//        if( substr($uri, -strlen($cache_extension))  === $cache_extension ){
+//            $uri = substr($uri, 0, -strlen($cache_extension) );
+//        }
+//
+//        // remove extension content
+//        if( substr($uri, -strlen($content_extension))  === $content_extension ){
+//            $uri = substr($uri, 0, -strlen($content_extension) );
+//        }
 
 
         return $uri;
