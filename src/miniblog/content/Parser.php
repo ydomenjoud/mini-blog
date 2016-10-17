@@ -59,7 +59,7 @@ class Parser
     }
 }
 
-class DateStore {
+class DateStore implements \ArrayAccess {
     public $object, $timestamp, $formatted;
     public function __construct(\DateTime $object){
         $this -> object = $object;
@@ -69,5 +69,27 @@ class DateStore {
     }
     public function __toString(){
         return $this -> timestamp."";
+    }
+
+    public function offsetExists($offset)
+    {
+        return isset($this->$offset);
+    }
+
+    public function offsetGet($offset)
+    {
+        return $this->$offset;
+    }
+
+
+    public function offsetSet($offset, $value)
+    {
+        $this->$offset = $value;
+    }
+
+
+    public function offsetUnset($offset)
+    {
+        $this->$offset = '';
     }
 }

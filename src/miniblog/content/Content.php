@@ -147,8 +147,8 @@ class Content
 
             // if not publish date or publish date not passed, continue
             if( !$parameters
-                || !isset($parameters['publish'])
-                || $parameters['publish'] > (new \DateTime())
+                || !isset($parameters['publish']['object'])
+                || $parameters['publish']['object'] > (new \DateTime())
                 || ( array_key_exists('page', $parameters) && $parameters['page'] == true )  ){
                 continue;
             }
@@ -164,6 +164,8 @@ class Content
             $pages_list[$uri] = [
                 'url' => 'http://' . $_SERVER['HTTP_HOST']. '/' .$uri . $cache_extension,
                 'author' => $parameters['author'] ?? '',
+                'image' => $parameters['image'] ?? '',
+                'article_directory' => '/' . dirname($uri) . '/',
                 'publish' => $parameters['publish'],
                 'title' => $parameters['title'],
                 'description' => $description,
