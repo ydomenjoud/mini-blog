@@ -8,16 +8,30 @@ block content
                a(href=page.image, target="_blank"): img(src=page.image, align="right")
             h1.title
                a(href=url)=page.title
-            if page.tags
-               each tag in page.tags
-                  a(href="/search.html?tags="+tag)='#' + tag
-                  |  &nbsp;
          .entry
             p #{page.description}
             p #{content}
          footer
+            if page.tags
+               each tag in page.tags
+                  a(href="/search.html?tags=" + tag)='#' + tag
+                  |  &nbsp;
+               | / &nbsp;
             if page.author
                a(rel="author", href="/search.html?author="+page['author'])=page.author
             | &nbsp;/&nbsp;
             time(datetime=page.publish.timestamp)=page.publish.formatted
          .clearfix
+         #disqus_thread
+         script
+
+            | var disqus_config = function () {
+            | this.page.url = '#{url}';
+            | this.page.identifier = '#{uri}';
+            | };
+            | (function() { // DON'T EDIT BELOW THIS LINE
+            | var d = document, s = d.createElement('script');
+            | s.src = '//saving-time.disqus.com/embed.js';
+            | s.setAttribute('data-timestamp', +new Date());
+            | (d.head || d.body).appendChild(s);
+            | })();

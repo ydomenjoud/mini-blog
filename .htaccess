@@ -2,7 +2,7 @@
 RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_URI} (\.html)$
+RewriteCond %{REQUEST_URI} (\.html|.xml)$
 RewriteCond %{REQUEST_URI} !^/content
 RewriteRule ^(.*)$ /index.php?url=$1 [NC,L,QSA]
 

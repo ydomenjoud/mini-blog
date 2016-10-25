@@ -198,6 +198,11 @@ article.small .post-content header img {
 
 }
 
+
+article.small footer {
+    padding-bottom: 0;
+}
+
 @media screen and (max-width: 600px) {
     article .post-content {
         padding-left: 20px;
@@ -468,6 +473,7 @@ article footer {
     line-height: 16px;
     position: relative;
     min-height: 16px;
+    padding-bottom: 30px;
 }
 article footer a {
     color: #999;

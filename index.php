@@ -4,7 +4,7 @@ require __DIR__ . '/vendor/autoload.php';
 
 # configuration
 define('TEMPLATE_DIR', 'template/miniblog');
-define('TEMPLATE_LAYOUT_POST', 'post.pug');
+define('TEMPLATE_DEFAULT_LAYOUT', 'default');
 
 define('CACHE_DIR', 'cache');
 define('CACHE_EXTENSION', '.html');

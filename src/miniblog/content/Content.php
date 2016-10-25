@@ -83,8 +83,10 @@ class Content
 
             $vars['template_directory'] = TEMPLATE_DIR;
             $vars['article_directory'] = '/' . dirname($uri) . '/';
+            $vars['site_url'] = 'http://' . $_SERVER['HTTP_HOST'];
             $vars['pages_list'] = $this->pages_list;
-            $vars['url'] = 'http://' . $_SERVER['HTTP_HOST']. '/' . $uri . CACHE_EXTENSION;
+            $vars['uri'] = $uri;
+            $vars['url'] = $vars['site_url'] . '/'. $uri . CACHE_EXTENSION;
 
             // filters
             $vars['filtered_list'] = [];
@@ -104,7 +106,7 @@ class Content
             }
 
             // render layout
-            $layout = $this -> templater -> layoutExists($uri) ?  $uri : 'default';
+            $layout = $this -> templater -> layoutExists($uri) ?  $uri : TEMPLATE_DEFAULT_LAYOUT;
             $content = $this -> templater ->render($layout, $vars);
 
             // cache page
